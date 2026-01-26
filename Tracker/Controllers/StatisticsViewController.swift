@@ -9,7 +9,6 @@ class StatisticsViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        //title = "Статистика"
         
         let label = UILabel()
         label.text = "Экран статистики"
