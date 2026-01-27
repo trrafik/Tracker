@@ -189,14 +189,11 @@ class TrackersViewController: UIViewController {
                 
                 return matchesSchedule && matchesSearch
             }
-            
             if filteredTrackers.isEmpty {
                 return nil
             }
-            
             return TrackerCategory(title: category.title, trackers: filteredTrackers)
         }
-        
         updateUI()
     }
     
@@ -226,7 +223,6 @@ class TrackersViewController: UIViewController {
                 calendar.isDate(record.date, inSameDayAs: normalizedDate)
             }
         }
-        
         collectionView.reloadData()
     }
     
@@ -279,7 +275,6 @@ extension TrackersViewController: UICollectionViewDataSource {
             
             self.toggleTrackerCompletion(trackerId: trackerId, isCompleted: newState)
         }
-        
         return cell
     }
     

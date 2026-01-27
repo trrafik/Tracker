@@ -1,6 +1,14 @@
 import UIKit
 
-class StatisticsViewController: UIViewController {
+final class StatisticsViewController: UIViewController {
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Экран статистики"
+        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -9,18 +17,14 @@ class StatisticsViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        
-        let label = UILabel()
-        label.text = "Экран статистики"
-        label.font = .systemFont(ofSize: 20, weight: .medium)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
-        
+        view.addSubview(titleLabel)
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }

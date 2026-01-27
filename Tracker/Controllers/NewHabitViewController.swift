@@ -1,6 +1,6 @@
 import UIKit
 
-class NewHabitViewController: UIViewController {
+final class NewHabitViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: NewHabitViewControllerDelegate?

@@ -1,6 +1,6 @@
 import UIKit
 
-class ScheduleViewController: UIViewController {
+final class ScheduleViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -10,11 +10,7 @@ class ScheduleViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     private let doneButton = UIButton(type: .system)
     
-    
-    private let weekdays: [Tracker.Weekday] = [
-        .monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday
-    ]
-    
+    private let weekdays = Tracker.Weekday.allCases
     
     // MARK: - Lifecycle
     
