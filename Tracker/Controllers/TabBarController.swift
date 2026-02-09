@@ -1,8 +1,8 @@
 import UIKit
 
-class TabBarController: UITabBarController {
+final class TabBarController: UITabBarController {
     // MARK: - Constants
-    
+
     private enum Constants {
         static let trackersTitle = "Трекеры"
         static let statisticsTitle = "Статистика"
@@ -12,7 +12,7 @@ class TabBarController: UITabBarController {
         static let statisticsIcon = UIImage(systemName: "hare")
         static let statisticsSelectedIcon = UIImage(systemName: "hare.fill")
     }
-    
+
     private lazy var trackersNavigationController: UINavigationController = {
         let vc = TrackersViewController()
         let nav = UINavigationController(rootViewController: vc)
@@ -58,8 +58,4 @@ class TabBarController: UITabBarController {
             separatorLine.heightAnchor.constraint(equalToConstant: 0.5)
         ])
     }
-}
-
-#Preview {
-    TabBarController()
 }
