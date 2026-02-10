@@ -130,7 +130,3 @@ extension ScheduleViewController: UITableViewDelegate {
 protocol ScheduleViewControllerDelegate: AnyObject {
     func didSelectSchedule(_ weekdays: [Tracker.Weekday])
 }
-
-#Preview {
-    ScheduleViewController()
-}

@@ -1,48 +1,50 @@
 import UIKit
 
-class TrackersViewController: UIViewController {
-    
+final class TrackersViewController: UIViewController {
+
     // MARK: - UI Elements
-    
+
     private let collectionView: UICollectionView
     private let searchController = UISearchController(searchResultsController: nil)
     private let datePicker = UIDatePicker()
-    
+
     // MARK: - Data
-    
+
+    private let trackerStore = TrackerStore()
+    private let recordStore = TrackerRecordStore()
+
     var categories: [TrackerCategory] = []
     var completedTrackers: [TrackerRecord] = []
-    
-    private let defaultCategoryTitle = "Привычки"
+
     private var filteredCategories: [TrackerCategory] = []
     var currentDate: Date = Date()
     private var searchText: String = ""
-    
+
     private let label = UILabel()
     private let imageView = UIImageView()
-    
+
     // MARK: - Initialization
-    
+
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 41) / 2, height: 148)
         layout.minimumInteritemSpacing = 9
         layout.minimumLineSpacing = 16
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
-        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(nibName: nil, bundle: nil)
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        nil
     }
-    
+
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDefaultCategory()
+        setupStoresAndFRC()
         setupNavigationBar()
         setupSearchController()
         setupCollectionView()
@@ -50,12 +52,26 @@ class TrackersViewController: UIViewController {
         setupPlaceholder()
         updateFilteredCategories()
     }
-    
+
     // MARK: - Setup
-    
-    private func setupDefaultCategory() {
-        let defaultCategory = TrackerCategory(title: defaultCategoryTitle, trackers: [])
-        categories = [defaultCategory]
+
+    private func setupStoresAndFRC() {
+        do {
+            try trackerStore.performFetch()
+            trackerStore.onCategoriesDidChange = { [weak self] in
+                self?.reloadCategoriesFromStore()
+            }
+            categories = trackerStore.categoriesFromFetchedResults()
+            completedTrackers = (try? recordStore.allRecords()) ?? []
+        } catch {
+            categories = []
+            completedTrackers = []
+        }
+    }
+
+    private func reloadCategoriesFromStore() {
+        categories = trackerStore.categoriesFromFetchedResults()
+        updateFilteredCategories()
     }
     
     private func setupNavigationBar() {
@@ -211,17 +227,16 @@ class TrackersViewController: UIViewController {
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
         guard let normalizedDate = calendar.date(from: dateComponents) else { return }
-        
-        if isCompleted {
-            // Добавляем запись
-            let record = TrackerRecord(trackerId: trackerId, date: normalizedDate)
-            completedTrackers.append(record)
-        } else {
-            // Удаляем запись
-            completedTrackers.removeAll { record in
-                record.trackerId == trackerId &&
-                calendar.isDate(record.date, inSameDayAs: normalizedDate)
+
+        do {
+            if isCompleted {
+                try recordStore.addRecord(trackerId: trackerId, date: normalizedDate)
+            } else {
+                try recordStore.removeRecord(trackerId: trackerId, date: normalizedDate)
             }
+            completedTrackers = (try? recordStore.allRecords()) ?? completedTrackers
+        } catch {
+            // сохранение не удалось; можно показать ошибку
         }
         collectionView.reloadData()
     }
@@ -251,8 +266,10 @@ extension TrackersViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackerCell.identifier, for: indexPath) as! TrackerCell
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackerCell.identifier, for: indexPath) as? TrackerCell else {
+            preconditionFailure("Failed to dequeue TrackerCell")
+        }
+
         let tracker = filteredCategories[indexPath.section].trackers[indexPath.item]
         let isCompleted = isTrackerCompleted(trackerId: tracker.id, for: currentDate)
         let completedDaysCount = getCompletedDaysCount(for: tracker.id)
@@ -328,22 +345,12 @@ extension TrackersViewController: UISearchResultsUpdating {
 
 extension TrackersViewController: NewHabitViewControllerDelegate {
     func didCreateTracker(_ tracker: Tracker) {
-        guard let defaultCategoryIndex = categories.firstIndex(where: { $0.title == defaultCategoryTitle }) else {
-            let defaultCategory = TrackerCategory(title: defaultCategoryTitle, trackers: [tracker])
-            categories = [defaultCategory]
-            updateFilteredCategories()
-            return
+        do {
+            try trackerStore.add(tracker)
+            // FRC вызовет controllerDidChangeContent и обновит categories
+        } catch {
+            // сохранение не удалось
         }
-        
-        // Создаем новый массив категорий с обновленной категорией (immutable подход)
-        let existingCategory = categories[defaultCategoryIndex]
-        let updatedTrackers = existingCategory.trackers + [tracker]
-        let updatedCategory = TrackerCategory(title: existingCategory.title, trackers: updatedTrackers)
-        
-        var updatedCategories = categories
-        updatedCategories[defaultCategoryIndex] = updatedCategory
-        categories = updatedCategories
-        
-        updateFilteredCategories()
     }
 }
+
