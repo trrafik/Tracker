@@ -1,9 +1,9 @@
 import UIKit
 import CoreData
 
-/// Делегат FRC, перенаправляет обновления в замыкание (чтобы не экспортировать Core Data в контроллеры)
+// Делегат FRC, перенаправляет обновления в замыкание (чтобы не экспортировать Core Data в контроллеры)
 private final class FRCDelegate: NSObject, NSFetchedResultsControllerDelegate {
-    let onDidChange: () -> Void
+    private let onDidChange: () -> Void
 
     init(onDidChange: @escaping () -> Void) {
         self.onDidChange = onDidChange
@@ -18,7 +18,6 @@ final class TrackerStore {
 
     private let context: NSManagedObjectContext
     private let categoryStore: TrackerCategoryStore
-    private let colorMarshalling = UIColorMarshalling()
 
     private lazy var fetchedResultsController: NSFetchedResultsController<TrackerCategoryCoreData> = {
         let request = TrackerCategoryCoreData.fetchRequest()
@@ -39,11 +38,11 @@ final class TrackerStore {
         self?.onCategoriesDidChange?()
     }
 
-    /// Вызывается при изменении данных в Core Data (через NSFetchedResultsController)
+    // Вызывается при изменении данных в Core Data (через NSFetchedResultsController)
     var onCategoriesDidChange: (() -> Void)?
 
     convenience init() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let context = DataBaseStore.shared.persistentContainer.viewContext
         let categoryStore = TrackerCategoryStore(context: context)
         self.init(context: context, categoryStore: categoryStore)
     }
@@ -53,12 +52,12 @@ final class TrackerStore {
         self.categoryStore = categoryStore
     }
 
-    /// Выполнить начальную загрузку данных для FRC
+    // Выполнить начальную загрузку данных для FRC
     func performFetch() throws {
         try fetchedResultsController.performFetch()
     }
 
-    /// Преобразование результатов FRC в доменные категории
+    // Преобразование результатов FRC в доменные категории
     func categoriesFromFetchedResults() -> [TrackerCategory] {
         guard let categories = fetchedResultsController.fetchedObjects else { return [] }
         return categories.map { categoryCore in
@@ -69,7 +68,6 @@ final class TrackerStore {
         }
     }
 
-    /// Добавить трекер в категорию по умолчанию (см. TrackerCategoryStore.defaultCategoryTitle)
     func add(_ tracker: Tracker) throws {
         let category = try categoryStore.defaultCategory()
 
@@ -77,20 +75,19 @@ final class TrackerStore {
         core.id = tracker.id
         core.name = tracker.name
         core.emoji = tracker.emoji
-        core.color = colorMarshalling.hexString(from: tracker.color)
+        core.color = UIColorMarshalling.hexString(from: tracker.color)
         core.schedule = tracker.schedule.map { String($0.rawValue) }.joined(separator: ",")
         core.category = category
 
         try context.save()
     }
 
-    /// Преобразование TrackerCoreData в доменную модель Tracker
     func tracker(from core: TrackerCoreData) -> Tracker? {
         guard let id = core.id,
               let name = core.name,
               let emoji = core.emoji else { return nil }
 
-        let color: UIColor = core.color.flatMap { colorMarshalling.color(from: $0) } ?? .systemGreen
+        let color: UIColor = core.color.flatMap { UIColorMarshalling.color(from: $0) } ?? .systemGreen
 
         let schedule: [Tracker.Weekday] = (core.schedule ?? "")
             .split(separator: ",")

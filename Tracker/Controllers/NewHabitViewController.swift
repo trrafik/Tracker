@@ -11,6 +11,11 @@ final class NewHabitViewController: UIViewController {
     // выбранное расписание
     private var selectedSchedule: [Tracker.Weekday] = []
     
+    // Получение текста расписания для отображения
+    private var scheduleSubtitle: String {
+        selectedSchedule.formattedSchedule()
+    }
+    
     // выбранная категория
     private let selectedCategory = "Привычки"
     
@@ -248,11 +253,6 @@ final class NewHabitViewController: UIViewController {
         navigationController?.pushViewController(scheduleViewController, animated: true)
     }
     
-    // Получение текста расписания для отображения
-    private func getScheduleSubtitle() -> String {
-        return selectedSchedule.formattedSchedule()
-    }
-    
     // Скрытие клавиатуры при тапе на экран
     @objc private func dismissKeyboard() {
         view.endEditing(true)
@@ -350,15 +350,8 @@ extension NewHabitViewController: UITableViewDataSource {
         cell.contentView.addSubview(disclosureImageView)
         
         // Настройка контента в зависимости от строки
-        if indexPath.row == 0 {
-            // Категория
-            titleLabel.text = "Категория"
-            subtitleLabel.text = selectedCategory
-        } else {
-            // Расписание
-            titleLabel.text = "Расписание"
-            subtitleLabel.text = getScheduleSubtitle()
-        }
+        titleLabel.text = indexPath.row == 0 ? "Категория" : "Расписание"
+        subtitleLabel.text = indexPath.row == 0 ? selectedCategory : scheduleSubtitle
         
         // Скрытие separator у последней ячейки
         let isLast = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
@@ -415,11 +408,7 @@ extension NewHabitViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView === emojiCollectionView {
-            return TrackerEmoji.allCases.count
-        } else {
-            return TrackerColor.allCases.count
-        }
+        collectionView === emojiCollectionView ? TrackerEmoji.allCases.count : TrackerColor.allCases.count
     }
     
     // Создание ячеек
@@ -427,23 +416,25 @@ extension NewHabitViewController: UICollectionViewDataSource {
         
         switch collectionView {
         case emojiCollectionView:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCollectionViewCell.reuseIdentifier, for: indexPath
-            ) as! EmojiCollectionViewCell
-            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCollectionViewCell.reuseIdentifier, for: indexPath) as? EmojiCollectionViewCell else {
+                preconditionFailure("Failed to dequeue EmojiCollectionViewCell")
+            }
             let emoji = TrackerEmoji.allCases[indexPath.item].value
             cell.configure(with: emoji)
             return cell
         case colorCollectionView:
-            let cell = collectionView.dequeueReusableCell(
+            guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ColorCollectionViewCell.reuseIdentifier,
                 for: indexPath
-            ) as! ColorCollectionViewCell
-            
+            ) as? ColorCollectionViewCell else {
+                preconditionFailure("Failed to dequeue ColorCollectionViewCell")
+            }
             let color = TrackerColor.allCases[indexPath.item].uiColor
             cell.configure(with: color)
             return cell
         default:
-            fatalError("Unexpected collectionView")
+            assertionFailure("Unexpected collectionView")
+            return UICollectionViewCell()
         }
     }
 }
@@ -467,7 +458,8 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
         case colorCollectionView:
             reuseIdentifier = ColorCollectionHeaderView.reuseIdentifier
         default:
-            fatalError("Unexpected collectionView")
+            assertionFailure("Unexpected collectionView")
+            return UICollectionReusableView()
         }
 
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath)
@@ -517,8 +509,4 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
 
 protocol NewHabitViewControllerDelegate: AnyObject {
     func didCreateTracker(_ tracker: Tracker)
-}
-
-#Preview {
-    NewHabitViewController()
 }

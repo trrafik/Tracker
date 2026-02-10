@@ -6,7 +6,7 @@ final class TrackerRecordStore {
     private let context: NSManagedObjectContext
 
     convenience init() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let context = DataBaseStore.shared.persistentContainer.viewContext
         self.init(context: context)
     }
 
@@ -14,7 +14,6 @@ final class TrackerRecordStore {
         self.context = context
     }
 
-    /// Добавить запись о выполнении трекера на дату
     func addRecord(trackerId: UUID, date: Date) throws {
         let trackerRequest = TrackerCoreData.fetchRequest()
         trackerRequest.predicate = NSPredicate(format: "id == %@", trackerId as CVarArg)
@@ -28,11 +27,10 @@ final class TrackerRecordStore {
         try context.save()
     }
 
-    /// Удалить запись о выполнении трекера на дату
     func removeRecord(trackerId: UUID, date: Date) throws {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: date)
-        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else { return }
 
         let request = TrackerRecordCoreData.fetchRequest()
         request.predicate = NSPredicate(
@@ -47,11 +45,10 @@ final class TrackerRecordStore {
         try context.save()
     }
 
-    /// Проверить, выполнён ли трекер на дату
     func isCompleted(trackerId: UUID, date: Date) throws -> Bool {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: date)
-        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else { return false }
 
         let request = TrackerRecordCoreData.fetchRequest()
         request.predicate = NSPredicate(
@@ -66,14 +63,13 @@ final class TrackerRecordStore {
         return count > 0
     }
 
-    /// Количество выполнений трекера (всего)
     func completedCount(trackerId: UUID) throws -> Int {
         let request = TrackerRecordCoreData.fetchRequest()
         request.predicate = NSPredicate(format: "tracker.id == %@", trackerId as CVarArg)
         return try context.count(for: request)
     }
 
-    /// Все записи (для отображения в UI без повторных запросов по дате)
+    // Все записи (для отображения в UI без повторных запросов по дате)
     func allRecords() throws -> [TrackerRecord] {
         let request = TrackerRecordCoreData.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \TrackerRecordCoreData.date, ascending: false)]
