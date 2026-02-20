@@ -3,9 +3,6 @@ import CoreData
 
 final class TrackerCategoryStore {
 
-    // Категория по умолчанию для новых привычек (пока выбор категорий не реализован)
-    static let defaultCategoryTitle = "Привычки"
-
     private let context: NSManagedObjectContext
 
     convenience init() {
@@ -17,12 +14,7 @@ final class TrackerCategoryStore {
         self.context = context
     }
 
-    // Возвращает категорию по умолчанию (создаётся в БД при первом обращении)
-    func defaultCategory() throws -> TrackerCategoryCoreData {
-        try category(withTitle: Self.defaultCategoryTitle)
-    }
-
-    // Возвращает существующую категорию по названию или создаёт новую
+    // Возвращает существующую категорию по названию или создаёт новую (категории существуют только через создание)
     func category(withTitle title: String) throws -> TrackerCategoryCoreData {
         let request = TrackerCategoryCoreData.fetchRequest()
         request.predicate = NSPredicate(format: "%K == %@", #keyPath(TrackerCategoryCoreData.title), title)
@@ -37,5 +29,15 @@ final class TrackerCategoryStore {
         category.title = title
         try context.save()
         return category
+    }
+
+    // Получение всех категорий из Core Data для отображения в списке
+    func fetchAllCategories() throws -> [TrackerCategory] {
+        let request = TrackerCategoryCoreData.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \TrackerCategoryCoreData.title, ascending: true)]
+        let results = try context.fetch(request)
+        return results.map { core in
+            TrackerCategory(title: core.title ?? "", trackers: [])
+        }
     }
 }

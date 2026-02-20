@@ -16,8 +16,8 @@ final class NewHabitViewController: UIViewController {
         selectedSchedule.formattedSchedule()
     }
     
-    // выбранная категория
-    private let selectedCategory = "Привычки"
+    // выбранная категория (nil — не выбрана, категории существуют только через создание)
+    private var selectedCategoryTitle: String?
     
     // Индексы выбранных эмодзи и цвета
     private var selectedEmojiIndexPath: IndexPath?
@@ -235,16 +235,26 @@ final class NewHabitViewController: UIViewController {
     
     // Обработка изменения текста в TextField
     @objc private func textFieldDidChange() {
-        let hasText = !(trackerNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true)
-        updateCreateButtonState(enabled: hasText)
+        updateCreateButtonState()
     }
     
-    // Обновление состояния кнопки "Создать"
-    private func updateCreateButtonState(enabled: Bool) {
+    // Обновление состояния кнопки "Создать" (название не пустое и категория выбрана)
+    private func updateCreateButtonState() {
+        let hasName = !(trackerNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true)
+        let hasCategory = selectedCategoryTitle != nil
+        let enabled = hasName && hasCategory
         createButton.isEnabled = enabled
         createButton.backgroundColor = enabled ? AppColors.blackDay : AppColors.grayButton
     }
     
+    // Открытие экрана выбора категории (модально, свайп вниз для закрытия)
+    private func openCategorySelection() {
+        let categoryVC = CategoryListViewController(selectedCategoryTitle: selectedCategoryTitle)
+        categoryVC.delegate = self
+        let nav = UINavigationController(rootViewController: categoryVC)
+        present(nav, animated: true)
+    }
+
     // Открытие экрана выбора расписания
     private func openScheduleSelection() {
         let scheduleViewController = ScheduleViewController()
@@ -297,8 +307,19 @@ final class NewHabitViewController: UIViewController {
             schedule: selectedSchedule
         )
         
-        delegate?.didCreateTracker(newTracker)
+        guard let categoryTitle = selectedCategoryTitle else { return }
+        delegate?.didCreateTracker(newTracker, categoryTitle: categoryTitle)
         dismiss(animated: true)
+    }
+}
+
+// MARK: - CategoryListViewControllerDelegate
+
+extension NewHabitViewController: CategoryListViewControllerDelegate {
+    func categoryListViewController(_ controller: CategoryListViewController, didSelectCategory title: String) {
+        selectedCategoryTitle = title
+        optionsTableView.reloadData()
+        updateCreateButtonState()
     }
 }
 
@@ -351,7 +372,9 @@ extension NewHabitViewController: UITableViewDataSource {
         
         // Настройка контента в зависимости от строки
         titleLabel.text = indexPath.row == 0 ? "Категория" : "Расписание"
-        subtitleLabel.text = indexPath.row == 0 ? selectedCategory : scheduleSubtitle
+        let subtitleText = indexPath.row == 0 ? (selectedCategoryTitle ?? "") : scheduleSubtitle
+        subtitleLabel.text = subtitleText
+        subtitleLabel.isHidden = subtitleText.isEmpty
         
         // Скрытие separator у последней ячейки
         let isLast = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
@@ -364,20 +387,27 @@ extension NewHabitViewController: UITableViewDataSource {
             )
         }
         
-        // Настройка constraints для элементов ячейки
-        NSLayoutConstraint.activate([
+        // Constraints: без subtitle — только заголовок по центру, с subtitle — заголовок сверху и subtitle под ним
+        var constraints: [NSLayoutConstraint] = [
             titleLabel.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 15),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: disclosureImageView.leadingAnchor, constant: -8),
-            
-            subtitleLabel.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
-            subtitleLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -15),
-            subtitleLabel.trailingAnchor.constraint(lessThanOrEqualTo: disclosureImageView.leadingAnchor, constant: -8),
-            
             disclosureImageView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16),
             disclosureImageView.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor)
-        ])
+        ]
+        if subtitleText.isEmpty {
+            constraints.append(contentsOf: [
+                titleLabel.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor)
+            ])
+        } else {
+            constraints.append(contentsOf: [
+                titleLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 15),
+                subtitleLabel.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
+                subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
+                subtitleLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -15),
+                subtitleLabel.trailingAnchor.constraint(lessThanOrEqualTo: disclosureImageView.leadingAnchor, constant: -8)
+            ])
+        }
+        NSLayoutConstraint.activate(constraints)
         
         return cell
     }
@@ -392,9 +422,9 @@ extension NewHabitViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // Открытие экрана выбора расписания при нажатии на вторую строку
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
+            openCategorySelection()
+        } else if indexPath.row == 1 {
             openScheduleSelection()
         }
     }
@@ -508,5 +538,5 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Delegate Protocol
 
 protocol NewHabitViewControllerDelegate: AnyObject {
-    func didCreateTracker(_ tracker: Tracker)
+    func didCreateTracker(_ tracker: Tracker, categoryTitle: String)
 }

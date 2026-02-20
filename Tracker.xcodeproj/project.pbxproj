@@ -32,6 +32,12 @@
 		B7D6E76D2F2AC15000B36E80 /* ColorCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E76C2F2AC14F00B36E80 /* ColorCollectionHeaderView.swift */; };
 		B7D6E76F2F2AC7B000B36E80 /* TrackerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E76E2F2AC7A000B36E80 /* TrackerOptions.swift */; };
 		B7D6E7712F2AC7C000B36E80 /* UIColorMarshalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7702F2AC7C000B36E80 /* UIColorMarshalling.swift */; };
+		B7D6E7732F2E123400B36E80 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7722F2E123400B36E80 /* OnboardingPageViewController.swift */; };
+		B7D6E7752F2E123400B36E80 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7742F2E123400B36E80 /* OnboardingViewController.swift */; };
+		B7D6E7772F2E200000B36E80 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7762F2E200000B36E80 /* CategoryListViewModel.swift */; };
+		B7D6E7792F2E200001B36E80 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */; };
+		B7D6E77B2F2E200002B36E80 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E77A2F2E200002B36E80 /* CategoryListViewController.swift */; };
+		B7D6E77D2F2E200003B36E80 /* NewCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E77C2F2E200003B36E80 /* NewCategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +68,12 @@
 		B7D6E76C2F2AC14F00B36E80 /* ColorCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B7D6E76E2F2AC7A000B36E80 /* TrackerOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackerOptions.swift; sourceTree = "<group>"; };
 		B7D6E7702F2AC7C000B36E80 /* UIColorMarshalling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorMarshalling.swift; sourceTree = "<group>"; };
+		B7D6E7722F2E123400B36E80 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		B7D6E7742F2E123400B36E80 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		B7D6E7762F2E200000B36E80 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		B7D6E77A2F2E200002B36E80 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
+		B7D6E77C2F2E200003B36E80 /* NewCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,13 +112,28 @@
 				B7D6E7642F27BCFD00B36E80 /* Controllers */,
 				B7D6E7632F27BCEA00B36E80 /* Views */,
 				B7D6E7622F27BC6500B36E80 /* TrackerModels */,
+				B7D6E7802F2E200004B36E80 /* ViewModels */,
 				B7AAF2AC2F36506E000F7EF2 /* Store */,
 				B7AAF2B32F3A42B4000F7EF2 /* CoreData */,
-				B76469452EA93E1A00909568 /* Assets.xcassets */,
-				B76469472EA93E1A00909568 /* LaunchScreen.storyboard */,
-				B764694A2EA93E1A00909568 /* Info.plist */,
+				B7AAF2B42F3D2AFF000F7EF2 /* Supporting Files */,
 			);
 			path = Tracker;
+			sourceTree = "<group>";
+		};
+		B7D6E7802F2E200004B36E80 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E7852F2E210005B36E80 /* Category */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B7D6E7852F2E210005B36E80 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E7762F2E200000B36E80 /* CategoryListViewModel.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		B7AAF2AC2F36506E000F7EF2 /* Store */ = {
@@ -128,6 +155,16 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		B7AAF2B42F3D2AFF000F7EF2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B76469452EA93E1A00909568 /* Assets.xcassets */,
+				B76469472EA93E1A00909568 /* LaunchScreen.storyboard */,
+				B764694A2EA93E1A00909568 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		B7D6E7622F27BC6500B36E80 /* TrackerModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,25 +178,78 @@
 		B7D6E7632F27BCEA00B36E80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7D6E7862F2E210006B36E80 /* Category */,
+				B7D6E7872F2E210007B36E80 /* Habit */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B7D6E7862F2E210006B36E80 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B7D6E7872F2E210007B36E80 /* Habit */ = {
+			isa = PBXGroup;
+			children = (
 				B7D6E76A2F2AC13F00B36E80 /* EmojiCollectionHeaderView.swift */,
 				B7D6E76C2F2AC14F00B36E80 /* ColorCollectionHeaderView.swift */,
 				B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */,
 				B7D6E7672F2A47A100B36E80 /* EmojiCollectionViewCell.swift */,
 				B764695F2EA93E1900909568 /* TrackerCell.swift */,
 			);
-			path = Views;
+			path = Habit;
 			sourceTree = "<group>";
 		};
 		B7D6E7642F27BCFD00B36E80 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B7D6E7812F2E210001B36E80 /* Main */,
+				B7D6E7822F2E210002B36E80 /* Category */,
+				B7D6E7832F2E210003B36E80 /* Habit */,
+				B7D6E7842F2E210004B36E80 /* Onboarding */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B7D6E7812F2E210001B36E80 /* Main */ = {
+			isa = PBXGroup;
+			children = (
 				B764694F2EA93E1900909568 /* TabBarController.swift */,
 				B76469512EA93E1900909568 /* TrackersViewController.swift */,
 				B76469532EA93E1900909568 /* StatisticsViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		B7D6E7822F2E210002B36E80 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E77A2F2E200002B36E80 /* CategoryListViewController.swift */,
+				B7D6E77C2F2E200003B36E80 /* NewCategoryViewController.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B7D6E7832F2E210003B36E80 /* Habit */ = {
+			isa = PBXGroup;
+			children = (
 				B764695B2EA93E1900909568 /* NewHabitViewController.swift */,
 				B764695D2EA93E1900909568 /* ScheduleViewController.swift */,
 			);
-			path = Controllers;
+			path = Habit;
+			sourceTree = "<group>";
+		};
+		B7D6E7842F2E210004B36E80 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E7722F2E123400B36E80 /* OnboardingPageViewController.swift */,
+				B7D6E7742F2E123400B36E80 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		B7D6E7652F27BD1000B36E80 /* Helpers */ = {
@@ -265,6 +355,12 @@
 				B764695A2EA93E1900909568 /* TrackerRecord.swift in Sources */,
 				B76469622EA93E1900909568 /* AppColors.swift in Sources */,
 				B7D6E7712F2AC7C000B36E80 /* UIColorMarshalling.swift in Sources */,
+				B7D6E7732F2E123400B36E80 /* OnboardingPageViewController.swift in Sources */,
+				B7D6E7752F2E123400B36E80 /* OnboardingViewController.swift in Sources */,
+				B7D6E7772F2E200000B36E80 /* CategoryListViewModel.swift in Sources */,
+				B7D6E7792F2E200001B36E80 /* CategoryTableViewCell.swift in Sources */,
+				B7D6E77B2F2E200002B36E80 /* CategoryListViewController.swift in Sources */,
+				B7D6E77D2F2E200003B36E80 /* NewCategoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +506,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F6RN3HC46S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Tracker/Info.plist;
+				INFOPLIST_FILE = "Tracker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -438,7 +534,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F6RN3HC46S;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Tracker/Info.plist;
+				INFOPLIST_FILE = "Tracker/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
