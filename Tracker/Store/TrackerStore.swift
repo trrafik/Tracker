@@ -68,8 +68,8 @@ final class TrackerStore {
         }
     }
 
-    func add(_ tracker: Tracker) throws {
-        let category = try categoryStore.defaultCategory()
+    func add(_ tracker: Tracker, categoryTitle: String) throws {
+        let category = try categoryStore.category(withTitle: categoryTitle)
 
         let core = TrackerCoreData(context: context)
         core.id = tracker.id

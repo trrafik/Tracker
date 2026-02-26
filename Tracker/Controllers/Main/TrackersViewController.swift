@@ -344,9 +344,9 @@ extension TrackersViewController: UISearchResultsUpdating {
 // MARK: - NewHabitViewControllerDelegate
 
 extension TrackersViewController: NewHabitViewControllerDelegate {
-    func didCreateTracker(_ tracker: Tracker) {
+    func didCreateTracker(_ tracker: Tracker, categoryTitle: String) {
         do {
-            try trackerStore.add(tracker)
+            try trackerStore.add(tracker, categoryTitle: categoryTitle)
             // FRC вызовет controllerDidChangeContent и обновит categories
         } catch {
             // сохранение не удалось
