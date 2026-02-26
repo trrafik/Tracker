@@ -59,7 +59,7 @@ final class CategoryListViewController: UIViewController {
         b.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         b.backgroundColor = AppColors.blackDay
         b.layer.cornerRadius = 16
-        b.addTarget(self, action: #selector(addCategoryTapped), for: .touchUpInside)
+        b.addAction(UIAction { [weak self] _ in self?.addCategoryTapped() }, for: .touchUpInside)
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
@@ -71,8 +71,9 @@ final class CategoryListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        nil
     }
 
     override func viewDidLoad() {
@@ -153,7 +154,7 @@ final class CategoryListViewController: UIViewController {
         tableView.reloadData()
     }
 
-    @objc private func addCategoryTapped() {
+    private func addCategoryTapped() {
         let newCategoryVC = NewCategoryViewController()
         newCategoryVC.onCategoryCreated = { [weak self] _ in
             self?.viewModel.loadCategories()
@@ -167,7 +168,7 @@ final class CategoryListViewController: UIViewController {
 
 extension CategoryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows()
+        viewModel.rowsAmount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -175,7 +176,7 @@ extension CategoryListViewController: UITableViewDataSource {
               let title = viewModel.categoryTitle(at: indexPath.row) else {
             return UITableViewCell()
         }
-        let count = viewModel.numberOfRows()
+        let count = viewModel.rowsAmount
         let isFirst = indexPath.row == 0
         let isLast = indexPath.row == count - 1
         cell.configure(title: title, isSelected: viewModel.isSelected(at: indexPath.row))
