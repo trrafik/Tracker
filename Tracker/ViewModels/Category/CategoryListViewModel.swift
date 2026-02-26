@@ -1,17 +1,12 @@
 import Foundation
 
-//ViewModel экрана списка категорий готовит данные для ячеек и обрабатывает действия пользователя.
+// ViewModel экрана списка категорий: готовит данные для ячеек и обрабатывает действия пользователя.
 final class CategoryListViewModel {
 
     // MARK: - Bindings
-    
-    // Вызывается при изменении списка категорий — обновить таблицу
+
     var onCategoriesDidChange: (() -> Void)?
-
-    // Вызывается при выборе категории — передаётся выбранное название
     var onSelectionDidChange: ((String) -> Void)?
-
-    // Вызывается при смене выбора
     var onSelectionIndexDidChange: ((Int?, Int) -> Void)?
 
     // MARK: - Private
@@ -27,22 +22,17 @@ final class CategoryListViewModel {
         self.selectedCategoryTitle = selectedCategoryTitle
     }
 
-    // MARK: - Данные для таблицы (получение из модели, подготовка для ячеек)
+    // MARK: - Данные для таблицы (свойства)
 
-    // Загрузить категории из модели и уведомить View
-    func loadCategories() {
-        do {
-            categories = try categoryStore.fetchAllCategories()
-            onCategoriesDidChange?()
-        } catch {
-            categories = []
-            onCategoriesDidChange?()
-        }
-    }
-
-    func numberOfRows() -> Int {
+    var rowsAmount: Int {
         categories.count
     }
+
+    var isEmpty: Bool {
+        categories.isEmpty
+    }
+
+    // MARK: - Данные для таблицы (по индексу)
 
     func categoryTitle(at index: Int) -> String? {
         guard index >= 0, index < categories.count else { return nil }
@@ -54,7 +44,17 @@ final class CategoryListViewModel {
         return title == selectedCategoryTitle
     }
 
-    // MARK: - Обработка действий пользователя
+    // MARK: - Действия
+
+    func loadCategories() {
+        do {
+            categories = try categoryStore.fetchAllCategories()
+            onCategoriesDidChange?()
+        } catch {
+            categories = []
+            onCategoriesDidChange?()
+        }
+    }
 
     func selectCategory(at index: Int) {
         guard let title = categoryTitle(at: index) else { return }
@@ -62,9 +62,5 @@ final class CategoryListViewModel {
         selectedCategoryTitle = title
         onSelectionDidChange?(title)
         onSelectionIndexDidChange?(previousIndex, index)
-    }
-
-    var isEmpty: Bool {
-        categories.isEmpty
     }
 }

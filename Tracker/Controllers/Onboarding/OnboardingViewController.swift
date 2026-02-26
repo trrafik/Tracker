@@ -3,12 +3,6 @@ import UIKit
 /// Онбординг: UIPageViewController со стилем scroll, страницы — OnboardingPageViewController.
 final class OnboardingViewController: UIPageViewController {
 
-    // MARK: - Constants
-
-    private enum Constants {
-        static let onboardingCompletedKey = "onboardingCompleted"
-    }
-
     // MARK: - Pages content
 
     private let pagesContent: [OnboardingPageViewController.PageContent] = [
@@ -87,7 +81,7 @@ final class OnboardingViewController: UIPageViewController {
     // MARK: - Helpers
 
     private func completeOnboarding() {
-        UserDefaults.standard.set(true, forKey: Constants.onboardingCompletedKey)
+        UserDefaultsService.shared.isOnboardingCompleted = true
         showMainInterface()
     }
 
