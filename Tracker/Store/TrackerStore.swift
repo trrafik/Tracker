@@ -82,6 +82,34 @@ final class TrackerStore {
         try context.save()
     }
 
+    func update(_ tracker: Tracker, categoryTitle: String) throws {
+        let request = TrackerCoreData.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", tracker.id as CVarArg)
+        request.fetchLimit = 1
+
+        guard let core = try context.fetch(request).first else { return }
+
+        core.name = tracker.name
+        core.emoji = tracker.emoji
+        core.color = UIColorMarshalling.hexString(from: tracker.color)
+        core.schedule = tracker.schedule.map { String($0.rawValue) }.joined(separator: ",")
+
+        let newCategory = try categoryStore.category(withTitle: categoryTitle)
+        core.category = newCategory
+
+        try context.save()
+    }
+
+    func delete(trackerId: UUID) throws {
+        let request = TrackerCoreData.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", trackerId as CVarArg)
+        request.fetchLimit = 1
+
+        guard let core = try context.fetch(request).first else { return }
+        context.delete(core)
+        try context.save()
+    }
+
     func tracker(from core: TrackerCoreData) -> Tracker? {
         guard let id = core.id,
               let name = core.name,

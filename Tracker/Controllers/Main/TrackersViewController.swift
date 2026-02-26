@@ -292,6 +292,11 @@ extension TrackersViewController: UICollectionViewDataSource {
             
             self.toggleTrackerCompletion(trackerId: trackerId, isCompleted: newState)
         }
+        
+        let categoryTitle = filteredCategories[indexPath.section].title
+        cell.onContextMenuConfiguration = { [weak self] in
+            self?.contextMenuConfiguration(tracker: tracker, categoryTitle: categoryTitle, completedDaysCount: completedDaysCount)
+        }
         return cell
     }
     
@@ -330,6 +335,60 @@ extension TrackersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 50)
     }
+    
+    /// Конфигурация контекстного меню для cardView (вызывается из ячейки). previewProvider: nil — превью будет сам cardView.
+    private func contextMenuConfiguration(tracker: Tracker, categoryTitle: String, completedDaysCount: Int) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            guard let self = self else { return nil }
+            
+            let editAction = UIAction(title: "Редактировать", image: nil) { _ in
+                self.openEditHabit(tracker: tracker, categoryTitle: categoryTitle, completedDaysCount: completedDaysCount)
+            }
+            
+            let deleteAction = UIAction(
+                title: "Удалить",
+                image: nil,
+                attributes: .destructive
+            ) { _ in
+                self.showDeleteConfirmation(tracker: tracker)
+            }
+            
+            return UIMenu(title: "", children: [editAction, deleteAction])
+        }
+    }
+    
+    private func openEditHabit(tracker: Tracker, categoryTitle: String, completedDaysCount: Int) {
+        let editVC = NewHabitViewController()
+        editVC.delegate = self
+        editVC.configureForEdit(tracker: tracker, categoryTitle: categoryTitle, completedDaysCount: completedDaysCount)
+        let nav = UINavigationController(rootViewController: editVC)
+        present(nav, animated: true)
+    }
+    
+    private func showDeleteConfirmation(tracker: Tracker) {
+        let alert = UIAlertController(
+            title: nil,
+            message: "Уверены что хотите удалить трекер?",
+            preferredStyle: .actionSheet
+        )
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
+            self?.deleteTracker(tracker)
+        }
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+    
+    private func deleteTracker(_ tracker: Tracker) {
+        do {
+            try trackerStore.delete(trackerId: tracker.id)
+            completedTrackers = completedTrackers.filter { $0.trackerId != tracker.id }
+            updateFilteredCategories()
+        } catch {
+            // удаление не удалось
+        }
+    }
 }
 
 // MARK: - UISearchResultsUpdating
@@ -350,6 +409,14 @@ extension TrackersViewController: NewHabitViewControllerDelegate {
             // FRC вызовет controllerDidChangeContent и обновит categories
         } catch {
             // сохранение не удалось
+        }
+    }
+    
+    func didUpdateTracker(_ tracker: Tracker, categoryTitle: String) {
+        do {
+            try trackerStore.update(tracker, categoryTitle: categoryTitle)
+        } catch {
+            // обновление не удалось
         }
     }
 }

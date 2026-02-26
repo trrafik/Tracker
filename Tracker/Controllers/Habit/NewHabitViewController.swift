@@ -19,6 +19,11 @@ final class NewHabitViewController: UIViewController {
     // выбранная категория (nil — не выбрана, категории существуют только через создание)
     private var selectedCategoryTitle: String?
     
+    // Режим редактирования: если задан — экран в режиме редактирования привычки
+    private var editContext: (tracker: Tracker, categoryTitle: String, completedDaysCount: Int)?
+    
+    private var isEditMode: Bool { editContext != nil }
+    
     // Индексы выбранных эмодзи и цвета
     private var selectedEmojiIndexPath: IndexPath?
     private var selectedColorIndexPath: IndexPath?
@@ -40,6 +45,23 @@ final class NewHabitViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    // Лейбл количества отмеченных дней (только в режиме редактирования)
+    private lazy var completedDaysLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.textColor = AppColors.blackDay
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+    
+    private var completedDaysLabelHeightConstraint: NSLayoutConstraint?
+    
+    /// В режиме создания: поле названия от верха contentView. В режиме редактирования: от низа лейбла «N дней».
+    private var trackerNameFieldTopToContentConstraint: NSLayoutConstraint?
+    private var trackerNameFieldTopToLabelConstraint: NSLayoutConstraint?
     
     // Текстовое поле для ввода названия трекера
     private lazy var trackerNameTextField: UITextField = {
@@ -139,6 +161,13 @@ final class NewHabitViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Public
+    
+    /// Настройка экрана для редактирования существующей привычки
+    func configureForEdit(tracker: Tracker, categoryTitle: String, completedDaysCount: Int) {
+        editContext = (tracker, categoryTitle, completedDaysCount)
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -146,6 +175,9 @@ final class NewHabitViewController: UIViewController {
         setupUI()
         setupConstraints()
         setupTapGesture()
+        if isEditMode {
+            applyEditMode()
+        }
     }
     
     // MARK: - Setup Methods
@@ -155,18 +187,64 @@ final class NewHabitViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         // Настройка Navigation Bar
-        navigationItem.title = "Новая привычка"
+        navigationItem.title = isEditMode ? "Редактирование привычки" : "Новая привычка"
         navigationController?.navigationBar.prefersLargeTitles = false
+        let barAppearance = UINavigationBarAppearance()
+        barAppearance.configureWithOpaqueBackground()
+        barAppearance.backgroundColor = .systemBackground
+        barAppearance.shadowColor = .clear
+        barAppearance.titleTextAttributes = [
+            .font: UIFont.systemFont(ofSize: 16, weight: .medium),
+            .foregroundColor: AppColors.blackDay
+        ]
+        navigationController?.navigationBar.standardAppearance = barAppearance
+        navigationController?.navigationBar.scrollEdgeAppearance = barAppearance
         
         // Добавление элементов на экран
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(completedDaysLabel)
         contentView.addSubview(trackerNameTextField)
         contentView.addSubview(optionsTableView)
         contentView.addSubview(emojiCollectionView)
         contentView.addSubview(colorCollectionView)
         view.addSubview(cancelButton)
         view.addSubview(createButton)
+    }
+    
+    private func applyEditMode() {
+        guard let ctx = editContext else { return }
+        completedDaysLabel.isHidden = false
+        let days = ctx.completedDaysCount
+        completedDaysLabel.text = days == 1 ? "1 день" : "\(days) дней"
+        trackerNameTextField.text = ctx.tracker.name
+        selectedCategoryTitle = ctx.categoryTitle
+        selectedSchedule = ctx.tracker.schedule
+        if let emojiIndex = TrackerEmoji.allCases.firstIndex(where: { $0.value == ctx.tracker.emoji }) {
+            selectedEmojiIndexPath = IndexPath(item: emojiIndex, section: 0)
+        }
+        if let colorIndex = TrackerColor.allCases.firstIndex(where: {
+            UIColorMarshalling.hexString(from: $0.uiColor) == UIColorMarshalling.hexString(from: ctx.tracker.color)
+        }) {
+            selectedColorIndexPath = IndexPath(item: colorIndex, section: 0)
+        }
+        if isEditMode {
+            completedDaysLabelHeightConstraint?.constant = 38
+        }
+        trackerNameFieldTopToContentConstraint?.isActive = false
+        trackerNameFieldTopToLabelConstraint?.isActive = true
+        createButton.setTitle("Сохранить", for: .normal)
+        createButton.isEnabled = true
+        createButton.backgroundColor = AppColors.blackDay
+        optionsTableView.reloadData()
+        emojiCollectionView.reloadData()
+        colorCollectionView.reloadData()
+        if let ip = selectedEmojiIndexPath {
+            emojiCollectionView.selectItem(at: ip, animated: false, scrollPosition: [])
+        }
+        if let ip = selectedColorIndexPath {
+            colorCollectionView.selectItem(at: ip, animated: false, scrollPosition: [])
+        }
     }
     
     // Настройка constraints для всех элементов
@@ -185,8 +263,10 @@ final class NewHabitViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             
-            // TextField для названия трекера
-            trackerNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
+            // Лейбл количества дней (в режиме редактирования)
+            completedDaysLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
+            completedDaysLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            completedDaysLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             trackerNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             trackerNameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             trackerNameTextField.heightAnchor.constraint(equalToConstant: 75),
@@ -222,6 +302,12 @@ final class NewHabitViewController: UIViewController {
             createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             createButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+        completedDaysLabelHeightConstraint = completedDaysLabel.heightAnchor.constraint(equalToConstant: 0)
+        completedDaysLabelHeightConstraint?.isActive = true
+        
+        trackerNameFieldTopToContentConstraint = trackerNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24)
+        trackerNameFieldTopToLabelConstraint = trackerNameTextField.topAnchor.constraint(equalTo: completedDaysLabel.bottomAnchor, constant: 40)
+        trackerNameFieldTopToContentConstraint?.isActive = true
     }
     
     // Настройка жеста для скрытия клавиатуры
@@ -296,6 +382,21 @@ final class NewHabitViewController: UIViewController {
             selectedColor = TrackerColor.allCases[indexPath.item].uiColor
         } else {
             selectedColor = AppColors.greenTracker
+        }
+        
+        if let ctx = editContext {
+            // Режим редактирования — сохраняем с тем же id
+            let updatedTracker = Tracker(
+                id: ctx.tracker.id,
+                name: trackerName,
+                color: selectedColor,
+                emoji: selectedEmoji,
+                schedule: selectedSchedule
+            )
+            guard let categoryTitle = selectedCategoryTitle else { return }
+            delegate?.didUpdateTracker(updatedTracker, categoryTitle: categoryTitle)
+            dismiss(animated: true)
+            return
         }
         
         // Создание нового трекера
@@ -539,4 +640,5 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
 
 protocol NewHabitViewControllerDelegate: AnyObject {
     func didCreateTracker(_ tracker: Tracker, categoryTitle: String)
+    func didUpdateTracker(_ tracker: Tracker, categoryTitle: String)
 }

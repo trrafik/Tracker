@@ -22,12 +22,15 @@ class TrackerCell: UICollectionViewCell {
     
     static let identifier = "TrackerCell"
     var onCompleteButtonTapped: ((UUID, Bool) -> Void)?
+    /// Конфигурация контекстного меню — вызывается при долгом нажатии на cardView. Контроллер передаёт замыкание, возвращающее конфиг.
+    var onContextMenuConfiguration: (() -> UIContextMenuConfiguration?)?
     
     // MARK: - Private
 
     private var tracker: Tracker?
     private var isCompleted: Bool = false
     private var completedDaysCount: Int = 0
+    private var contextMenuInteraction: UIContextMenuInteraction?
     
     // MARK: - UI Elements
     
@@ -166,6 +169,12 @@ class TrackerCell: UICollectionViewCell {
         
         // Настройка кнопки
         updateCompleteButton(isFutureDate: isFutureDate)
+        
+        if contextMenuInteraction == nil {
+            let interaction = UIContextMenuInteraction(delegate: self)
+            cardView.addInteraction(interaction)
+            contextMenuInteraction = interaction
+        }
     }
     
     // MARK: - Private Helpers
@@ -199,6 +208,17 @@ class TrackerCell: UICollectionViewCell {
     @objc private func completeButtonTapped() {
         guard let tracker = tracker else { return }
         onCompleteButtonTapped?(tracker.id, !isCompleted)
+    }
+}
+
+// MARK: - UIContextMenuInteractionDelegate
+
+extension TrackerCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(
+        _ interaction: UIContextMenuInteraction,
+        configurationForMenuAtLocation location: CGPoint
+    ) -> UIContextMenuConfiguration? {
+        return onContextMenuConfiguration?()
     }
 }
 
