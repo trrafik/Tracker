@@ -1,0 +1,74 @@
+/* Main */
+"main.trackers" = "Trackers";
+"main.statistics" = "Statistics";
+"main.filters" = "Filters";
+"main.placeholderEmpty" = "What will we track?";
+"main.placeholderNotFound" = "Nothing found";
+"main.editTracker" = "Edit";
+"main.delete" = "Delete";
+"main.deleteConfirmation" = "Are you sure you want to delete this tracker?";
+
+/* Search */
+"search.placeholder" = "Search";
+"search.cancel" = "Cancel";
+
+/* Common */
+"common.cancel" = "Cancel";
+"common.done" = "Done";
+
+/* Statistics */
+"stat.empty" = "Nothing to analyze yet";
+"stat.bestPeriod" = "Best period";
+"stat.idealDays" = "Ideal days";
+"stat.completed" = "Trackers completed";
+"stat.average" = "Average";
+
+/* Habit / New habit */
+"habit.trackerNamePlaceholder" = "Enter tracker name";
+"habit.create" = "Create";
+"habit.save" = "Save";
+"habit.newTitle" = "New habit";
+"habit.editTitle" = "Edit habit";
+"habit.category" = "Category";
+"habit.schedule" = "Schedule";
+"habit.scheduleTitle" = "Schedule";
+"habit.emoji" = "Emoji";
+"habit.color" = "Color";
+
+/* Category */
+"category.title" = "Category";
+"category.newTitle" = "New category";
+"category.namePlaceholder" = "Enter category name";
+"category.addButton" = "Add category";
+"category.placeholder" = "Habits and events can be\ngrouped by meaning";
+
+/* Filter */
+"filter.all" = "All trackers";
+"filter.today" = "Trackers for today";
+"filter.completed" = "Completed";
+"filter.uncompleted" = "Uncompleted";
+
+/* Onboarding */
+"onboarding.page1" = "Track only what you want";
+"onboarding.page2" = "Even if it's not liters of water and yoga";
+"onboarding.button" = "That's technology!";
+
+/* Weekdays short */
+"weekday.short.mon" = "Mon";
+"weekday.short.tue" = "Tue";
+"weekday.short.wed" = "Wed";
+"weekday.short.thu" = "Thu";
+"weekday.short.fri" = "Fri";
+"weekday.short.sat" = "Sat";
+"weekday.short.sun" = "Sun";
+
+/* Weekdays full */
+"weekday.full.monday" = "Monday";
+"weekday.full.tuesday" = "Tuesday";
+"weekday.full.wednesday" = "Wednesday";
+"weekday.full.thursday" = "Thursday";
+"weekday.full.friday" = "Friday";
+"weekday.full.saturday" = "Saturday";
+"weekday.full.sunday" = "Sunday";
+
+"weekday.everyDay" = "Every day";

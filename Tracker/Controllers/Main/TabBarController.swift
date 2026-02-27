@@ -1,11 +1,12 @@
 import UIKit
 
+/// Корневой таб-бар с вкладками «Трекеры» и «Статистика».
 final class TabBarController: UITabBarController {
     // MARK: - Constants
 
     private enum Constants {
-        static let trackersTitle = "Трекеры"
-        static let statisticsTitle = "Статистика"
+        static let trackersTitle = NSLocalizedString("main.trackers", comment: "Trackers tab")
+        static let statisticsTitle = NSLocalizedString("main.statistics", comment: "Statistics tab")
 
         static let trackersIcon = UIImage(systemName: "record.circle")
         static let trackersSelectedIcon = UIImage(systemName: "record.circle.fill")
@@ -41,7 +42,7 @@ final class TabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
-        tabBar.backgroundColor = .systemBackground
+        tabBar.backgroundColor = AppColors.primaryColor
         tabBar.tintColor = .systemBlue
         tabBar.unselectedItemTintColor = .systemGray
         

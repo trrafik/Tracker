@@ -25,7 +25,7 @@ final class OnboardingPageViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 32, weight: .bold)
-        label.textColor = AppColors.blackDay
+        label.textColor = AppColors.primaryInvertedColor
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
@@ -34,7 +34,7 @@ final class OnboardingPageViewController: UIViewController {
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Вот это технологии!", for: .normal)
+        button.setTitle(NSLocalizedString("onboarding.button", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = AppColors.blackDay
@@ -51,7 +51,7 @@ final class OnboardingPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = AppColors.primaryColor
         setupLayout()
     }
 

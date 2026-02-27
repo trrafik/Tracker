@@ -1,5 +1,6 @@
 import UIKit
 
+/// Экран выбора расписания трекера по дням недели.
 final class ScheduleViewController: UIViewController {
     
     // MARK: - Properties
@@ -23,14 +24,12 @@ final class ScheduleViewController: UIViewController {
     // MARK: - Setup
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColors.primaryColor
         
-        // Настройка Navigation Bar
-        navigationItem.title = "Расписание"
+        navigationItem.title = NSLocalizedString("habit.scheduleTitle", comment: "")
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.hidesBackButton = true
         
-        // Настройка TableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "WeekdayCell")
@@ -41,11 +40,10 @@ final class ScheduleViewController: UIViewController {
 
         view.addSubview(tableView)
         
-        // Настройка кнопки "Готово"
-        doneButton.setTitle("Готово", for: .normal)
-        doneButton.setTitleColor(.white, for: .normal)
+        doneButton.setTitle(NSLocalizedString("common.done", comment: "Done"), for: .normal)
+        doneButton.setTitleColor(AppColors.primaryColor, for: .normal)
         doneButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        doneButton.backgroundColor = AppColors.blackDay
+        doneButton.backgroundColor = AppColors.primaryInvertedColor
         doneButton.layer.cornerRadius = 16
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
@@ -54,13 +52,11 @@ final class ScheduleViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // TableView
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor, constant: -16),
             
-            // Кнопка "Готово"
             doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
@@ -100,7 +96,7 @@ extension ScheduleViewController: UITableViewDataSource {
         // Настройка текста
         cell.textLabel?.text = weekday.fullName
         cell.textLabel?.font = .systemFont(ofSize: 17, weight: .regular)
-        cell.textLabel?.textColor = AppColors.blackDay
+        cell.textLabel?.textColor = AppColors.primaryInvertedColor
         cell.backgroundColor = AppColors.grayBackground
 
         
@@ -127,6 +123,7 @@ extension ScheduleViewController: UITableViewDelegate {
 
 // MARK: - Delegate Protocol
 
+/// Делегат экрана выбора расписания.
 protocol ScheduleViewControllerDelegate: AnyObject {
     func didSelectSchedule(_ weekdays: [Tracker.Weekday])
 }

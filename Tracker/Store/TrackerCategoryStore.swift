@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 
+/// Хранилище категорий трекеров поверх Core Data.
 final class TrackerCategoryStore {
 
     private let context: NSManagedObjectContext
@@ -14,7 +15,6 @@ final class TrackerCategoryStore {
         self.context = context
     }
 
-    // Возвращает существующую категорию по названию или создаёт новую (категории существуют только через создание)
     func category(withTitle title: String) throws -> TrackerCategoryCoreData {
         let request = TrackerCategoryCoreData.fetchRequest()
         request.predicate = NSPredicate(format: "%K == %@", #keyPath(TrackerCategoryCoreData.title), title)
@@ -31,7 +31,6 @@ final class TrackerCategoryStore {
         return category
     }
 
-    // Получение всех категорий из Core Data для отображения в списке
     func fetchAllCategories() throws -> [TrackerCategory] {
         let request = TrackerCategoryCoreData.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \TrackerCategoryCoreData.title, ascending: true)]

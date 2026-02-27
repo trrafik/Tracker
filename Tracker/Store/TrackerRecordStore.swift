@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 
+/// Хранилище записей о выполнении трекеров.
 final class TrackerRecordStore {
 
     private let context: NSManagedObjectContext
@@ -69,7 +70,6 @@ final class TrackerRecordStore {
         return try context.count(for: request)
     }
 
-    // Все записи (для отображения в UI без повторных запросов по дате)
     func allRecords() throws -> [TrackerRecord] {
         let request = TrackerRecordCoreData.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \TrackerRecordCoreData.date, ascending: false)]

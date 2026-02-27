@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B716913D2F51AA410084BB8A /* StatCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B716913B2F51AA410084BB8A /* StatCardView.swift */; };
+		B73DA2F62F518F5B004F9C3B /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73DA2F52F518F5B004F9C3B /* AnalyticsService.swift */; };
 		B764693D2EA93E1900909568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B764693C2EA93E1900909568 /* AppDelegate.swift */; };
 		B764693F2EA93E1900909568 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B764693E2EA93E1900909568 /* SceneDelegate.swift */; };
 		B76469462EA93E1A00909568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B76469452EA93E1A00909568 /* Assets.xcassets */; };
@@ -27,6 +29,9 @@
 		B7AAF2B22F3650BE000F7EF2 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF2B12F3650BE000F7EF2 /* TrackerRecordStore.swift */; };
 		B7AAF2B62F3650C0000F7EF2 /* DataBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF2B72F3650C0000F7EF2 /* DataBaseStore.swift */; };
 		B7AAF2BA2F3650D0000F7EF2 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF2BB2F3650D0000F7EF2 /* UserDefaultsService.swift */; };
+		B7AAF3752F512A5B000F7EF2 /* TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF3742F512A5B000F7EF2 /* TrackerTests.swift */; };
+		B7AAF37D2F512AA2000F7EF2 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = B7AAF37C2F512AA2000F7EF2 /* SnapshotTesting */; };
+		B7AAF3802F513FD7000F7EF2 /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = B7AAF37F2F513FD7000F7EF2 /* AppMetricaCore */; };
 		B7D6E7682F2A47A100B36E80 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */; };
 		B7D6E7692F2A47A100B36E80 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7672F2A47A100B36E80 /* EmojiCollectionViewCell.swift */; };
 		B7D6E76B2F2AC14000B36E80 /* EmojiCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E76A2F2AC13F00B36E80 /* EmojiCollectionHeaderView.swift */; };
@@ -39,9 +44,27 @@
 		B7D6E7792F2E200001B36E80 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */; };
 		B7D6E77B2F2E200002B36E80 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E77A2F2E200002B36E80 /* CategoryListViewController.swift */; };
 		B7D6E77D2F2E200003B36E80 /* NewCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E77C2F2E200003B36E80 /* NewCategoryViewController.swift */; };
+		B7D6E79A2F2E200020B36E80 /* TrackerFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E79B2F2E200021B36E80 /* TrackerFilter.swift */; };
+		B7D6E79C2F2E200022B36E80 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E79D2F2E200023B36E80 /* FilterListViewController.swift */; };
+		B7D6E7A32F2E200031B36E80 /* TrackerStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7A22F2E200031B36E80 /* TrackerStatistics.swift */; };
+		B7D6E7A52F2E200032B36E80 /* Notification+Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7A42F2E200032B36E80 /* Notification+Tracker.swift */; };
+		B7LOCB12F2E200099B36E80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7LOCGP12F2E200098B36E80 /* Localizable.strings */; };
+		B7LOCB22F2E20009AB36E80 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B7LOCGP22F2E20009BB36E80 /* Localizable.stringsdict */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B7AAF3762F512A5B000F7EF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B76469312EA93E1900909568 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B76469382EA93E1900909568;
+			remoteInfo = Tracker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		B716913B2F51AA410084BB8A /* StatCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatCardView.swift; sourceTree = "<group>"; };
+		B73DA2F52F518F5B004F9C3B /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		B76469392EA93E1900909568 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B764693C2EA93E1900909568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B764693E2EA93E1900909568 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +87,8 @@
 		B7AAF2B12F3650BE000F7EF2 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
 		B7AAF2B72F3650C0000F7EF2 /* DataBaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStore.swift; sourceTree = "<group>"; };
 		B7AAF2BB2F3650D0000F7EF2 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		B7AAF3722F512A5B000F7EF2 /* TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7AAF3742F512A5B000F7EF2 /* TrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTests.swift; sourceTree = "<group>"; };
 		B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7D6E7672F2A47A100B36E80 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7D6E76A2F2AC13F00B36E80 /* EmojiCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -76,6 +101,14 @@
 		B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		B7D6E77A2F2E200002B36E80 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		B7D6E77C2F2E200003B36E80 /* NewCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryViewController.swift; sourceTree = "<group>"; };
+		B7D6E79B2F2E200021B36E80 /* TrackerFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerFilter.swift; sourceTree = "<group>"; };
+		B7D6E79D2F2E200023B36E80 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
+		B7D6E7A22F2E200031B36E80 /* TrackerStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStatistics.swift; sourceTree = "<group>"; };
+		B7D6E7A42F2E200032B36E80 /* Notification+Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Tracker.swift"; sourceTree = "<group>"; };
+		B7LOCEN12F2E20009AB36E80 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B7LOCEN22F2E20009CB36E80 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = English; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		B7LOCRU12F2E200099B36E80 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Russian; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B7LOCRU22F2E20009BB36E80 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = Russian; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,16 +116,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7AAF3802F513FD7000F7EF2 /* AppMetricaCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7AAF36F2F512A5B000F7EF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7AAF37D2F512AA2000F7EF2 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B716913C2F51AA410084BB8A /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				B716913B2F51AA410084BB8A /* StatCardView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		B76469302EA93E1900909568 = {
 			isa = PBXGroup;
 			children = (
 				B764693B2EA93E1900909568 /* Tracker */,
+				B7AAF3732F512A5B000F7EF2 /* TrackerTests */,
 				B764693A2EA93E1900909568 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				B76469392EA93E1900909568 /* Tracker.app */,
+				B7AAF3722F512A5B000F7EF2 /* TrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,22 +172,6 @@
 				B7AAF2B42F3D2AFF000F7EF2 /* Supporting Files */,
 			);
 			path = Tracker;
-			sourceTree = "<group>";
-		};
-		B7D6E7802F2E200004B36E80 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				B7D6E7852F2E210005B36E80 /* Category */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		B7D6E7852F2E210005B36E80 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				B7D6E7762F2E200000B36E80 /* CategoryListViewModel.swift */,
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 		B7AAF2AC2F36506E000F7EF2 /* Store */ = {
@@ -164,8 +200,18 @@
 				B76469452EA93E1A00909568 /* Assets.xcassets */,
 				B76469472EA93E1A00909568 /* LaunchScreen.storyboard */,
 				B764694A2EA93E1A00909568 /* Info.plist */,
+				B7LOCGP12F2E200098B36E80 /* Localizable.strings */,
+				B7LOCGP22F2E20009BB36E80 /* Localizable.stringsdict */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B7AAF3732F512A5B000F7EF2 /* TrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				B7AAF3742F512A5B000F7EF2 /* TrackerTests.swift */,
+			);
+			path = TrackerTests;
 			sourceTree = "<group>";
 		};
 		B7D6E7622F27BC6500B36E80 /* TrackerModels */ = {
@@ -174,6 +220,7 @@
 				B76469552EA93E1900909568 /* Tracker.swift */,
 				B76469572EA93E1900909568 /* TrackerCategory.swift */,
 				B76469592EA93E1900909568 /* TrackerRecord.swift */,
+				B7D6E79B2F2E200021B36E80 /* TrackerFilter.swift */,
 			);
 			path = TrackerModels;
 			sourceTree = "<group>";
@@ -181,30 +228,11 @@
 		B7D6E7632F27BCEA00B36E80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B716913C2F51AA410084BB8A /* Statistics */,
 				B7D6E7862F2E210006B36E80 /* Category */,
 				B7D6E7872F2E210007B36E80 /* Habit */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		B7D6E7862F2E210006B36E80 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		B7D6E7872F2E210007B36E80 /* Habit */ = {
-			isa = PBXGroup;
-			children = (
-				B7D6E76A2F2AC13F00B36E80 /* EmojiCollectionHeaderView.swift */,
-				B7D6E76C2F2AC14F00B36E80 /* ColorCollectionHeaderView.swift */,
-				B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */,
-				B7D6E7672F2A47A100B36E80 /* EmojiCollectionViewCell.swift */,
-				B764695F2EA93E1900909568 /* TrackerCell.swift */,
-			);
-			path = Habit;
 			sourceTree = "<group>";
 		};
 		B7D6E7642F27BCFD00B36E80 /* Controllers */ = {
@@ -218,12 +246,34 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		B7D6E7652F27BD1000B36E80 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B73DA2F52F518F5B004F9C3B /* AnalyticsService.swift */,
+				B76469612EA93E1900909568 /* AppColors.swift */,
+				B7D6E7A42F2E200032B36E80 /* Notification+Tracker.swift */,
+				B7D6E7A22F2E200031B36E80 /* TrackerStatistics.swift */,
+				B7D6E76E2F2AC7A000B36E80 /* TrackerOptions.swift */,
+				B7D6E7702F2AC7C000B36E80 /* UIColorMarshalling.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B7D6E7802F2E200004B36E80 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E7852F2E210005B36E80 /* Category */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		B7D6E7812F2E210001B36E80 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				B764694F2EA93E1900909568 /* TabBarController.swift */,
 				B76469512EA93E1900909568 /* TrackersViewController.swift */,
 				B76469532EA93E1900909568 /* StatisticsViewController.swift */,
+				B7D6E79D2F2E200023B36E80 /* FilterListViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -255,14 +305,32 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		B7D6E7652F27BD1000B36E80 /* Helpers */ = {
+		B7D6E7852F2E210005B36E80 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				B76469612EA93E1900909568 /* AppColors.swift */,
-				B7D6E76E2F2AC7A000B36E80 /* TrackerOptions.swift */,
-				B7D6E7702F2AC7C000B36E80 /* UIColorMarshalling.swift */,
+				B7D6E7762F2E200000B36E80 /* CategoryListViewModel.swift */,
 			);
-			path = Helpers;
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B7D6E7862F2E210006B36E80 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E7782F2E200001B36E80 /* CategoryTableViewCell.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		B7D6E7872F2E210007B36E80 /* Habit */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6E76A2F2AC13F00B36E80 /* EmojiCollectionHeaderView.swift */,
+				B7D6E76C2F2AC14F00B36E80 /* ColorCollectionHeaderView.swift */,
+				B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */,
+				B7D6E7672F2A47A100B36E80 /* EmojiCollectionViewCell.swift */,
+				B764695F2EA93E1900909568 /* TrackerCell.swift */,
+			);
+			path = Habit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,9 +349,33 @@
 			dependencies = (
 			);
 			name = Tracker;
+			packageProductDependencies = (
+				B7AAF37F2F513FD7000F7EF2 /* AppMetricaCore */,
+			);
 			productName = Tracker;
 			productReference = B76469392EA93E1900909568 /* Tracker.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B7AAF3712F512A5B000F7EF2 /* TrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7AAF37A2F512A5B000F7EF2 /* Build configuration list for PBXNativeTarget "TrackerTests" */;
+			buildPhases = (
+				B7AAF36E2F512A5B000F7EF2 /* Sources */,
+				B7AAF36F2F512A5B000F7EF2 /* Frameworks */,
+				B7AAF3702F512A5B000F7EF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B7AAF3772F512A5B000F7EF2 /* PBXTargetDependency */,
+			);
+			name = TrackerTests;
+			packageProductDependencies = (
+				B7AAF37C2F512AA2000F7EF2 /* SnapshotTesting */,
+			);
+			productName = TrackerTests;
+			productReference = B7AAF3722F512A5B000F7EF2 /* TrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -298,22 +390,32 @@
 					B76469382EA93E1900909568 = {
 						CreatedOnToolsVersion = 15.4;
 					};
+					B7AAF3712F512A5B000F7EF2 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B76469382EA93E1900909568;
+					};
 				};
 			};
 			buildConfigurationList = B76469342EA93E1900909568 /* Build configuration list for PBXProject "Tracker" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
+				ru,
 			);
 			mainGroup = B76469302EA93E1900909568;
+			packageReferences = (
+				B7AAF37B2F512AA2000F7EF2 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				B7AAF37E2F513FD7000F7EF2 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
+			);
 			productRefGroup = B764693A2EA93E1900909568 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				B76469382EA93E1900909568 /* Tracker */,
+				B7AAF3712F512A5B000F7EF2 /* TrackerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -325,6 +427,15 @@
 			files = (
 				B76469462EA93E1A00909568 /* Assets.xcassets in Resources */,
 				B76469492EA93E1A00909568 /* Base in Resources */,
+				B7LOCB12F2E200099B36E80 /* Localizable.strings in Resources */,
+				B7LOCB22F2E20009AB36E80 /* Localizable.stringsdict in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7AAF3702F512A5B000F7EF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +448,7 @@
 			files = (
 				B764693D2EA93E1900909568 /* AppDelegate.swift in Sources */,
 				B7AAF2B62F3650C0000F7EF2 /* DataBaseStore.swift in Sources */,
+				B73DA2F62F518F5B004F9C3B /* AnalyticsService.swift in Sources */,
 				B7AAF2BA2F3650D0000F7EF2 /* UserDefaultsService.swift in Sources */,
 				B7D6E7682F2A47A100B36E80 /* ColorCollectionViewCell.swift in Sources */,
 				B7AAF2AE2F3650A2000F7EF2 /* TrackerStore.swift in Sources */,
@@ -359,16 +471,37 @@
 				B764695A2EA93E1900909568 /* TrackerRecord.swift in Sources */,
 				B76469622EA93E1900909568 /* AppColors.swift in Sources */,
 				B7D6E7712F2AC7C000B36E80 /* UIColorMarshalling.swift in Sources */,
+				B716913D2F51AA410084BB8A /* StatCardView.swift in Sources */,
 				B7D6E7732F2E123400B36E80 /* OnboardingPageViewController.swift in Sources */,
 				B7D6E7752F2E123400B36E80 /* OnboardingViewController.swift in Sources */,
 				B7D6E7772F2E200000B36E80 /* CategoryListViewModel.swift in Sources */,
 				B7D6E7792F2E200001B36E80 /* CategoryTableViewCell.swift in Sources */,
 				B7D6E77B2F2E200002B36E80 /* CategoryListViewController.swift in Sources */,
 				B7D6E77D2F2E200003B36E80 /* NewCategoryViewController.swift in Sources */,
+				B7D6E79A2F2E200020B36E80 /* TrackerFilter.swift in Sources */,
+				B7D6E79C2F2E200022B36E80 /* FilterListViewController.swift in Sources */,
+				B7D6E7A32F2E200031B36E80 /* TrackerStatistics.swift in Sources */,
+				B7D6E7A52F2E200032B36E80 /* Notification+Tracker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7AAF36E2F512A5B000F7EF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7AAF3752F512A5B000F7EF2 /* TrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B7AAF3772F512A5B000F7EF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B76469382EA93E1900909568 /* Tracker */;
+			targetProxy = B7AAF3762F512A5B000F7EF2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B76469472EA93E1A00909568 /* LaunchScreen.storyboard */ = {
@@ -377,6 +510,24 @@
 				B76469482EA93E1A00909568 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B7LOCGP12F2E200098B36E80 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7LOCRU12F2E200099B36E80 /* Russian */,
+				B7LOCEN12F2E20009AB36E80 /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B7LOCGP22F2E20009BB36E80 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7LOCRU22F2E20009BB36E80 /* Russian */,
+				B7LOCEN22F2E20009CB36E80 /* English */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -557,6 +708,42 @@
 			};
 			name = Release;
 		};
+		B7AAF3782F512A5B000F7EF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6RN3HC46S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.trrafik.TrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tracker";
+			};
+			name = Debug;
+		};
+		B7AAF3792F512A5B000F7EF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F6RN3HC46S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.trrafik.TrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Tracker";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -578,7 +765,48 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		B7AAF37A2F512A5B000F7EF2 /* Build configuration list for PBXNativeTarget "TrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7AAF3782F512A5B000F7EF2 /* Debug */,
+				B7AAF3792F512A5B000F7EF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B7AAF37B2F512AA2000F7EF2 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.9;
+			};
+		};
+		B7AAF37E2F513FD7000F7EF2 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appmetrica/appmetrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B7AAF37C2F512AA2000F7EF2 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7AAF37B2F512AA2000F7EF2 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		B7AAF37F2F513FD7000F7EF2 /* AppMetricaCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7AAF37E2F513FD7000F7EF2 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
+			productName = AppMetricaCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B7AAF2862F2FAB3B000F7EF2 /* TrackersDB.xcdatamodeld */ = {

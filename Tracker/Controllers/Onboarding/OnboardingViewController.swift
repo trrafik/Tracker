@@ -7,11 +7,11 @@ final class OnboardingViewController: UIPageViewController {
 
     private let pagesContent: [OnboardingPageViewController.PageContent] = [
         .init(
-            title: "Отслеживайте только то, что хотите",
+            title: NSLocalizedString("onboarding.page1", comment: ""),
             backgroundImage: .onBoardingPage1
         ),
         .init(
-            title: "Даже если это не литры воды и йога",
+            title: NSLocalizedString("onboarding.page2", comment: ""),
             backgroundImage: .onBoardingPage2
         )
     ]
