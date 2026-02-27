@@ -2,14 +2,12 @@ import UIKit
 
 final class NewCategoryViewController: UIViewController {
 
-    // Вызывается после успешного создания категории (передаётся название)
+    /// Колбэк, вызываемый после успешного создания категории.
     var onCategoryCreated: ((String) -> Void)?
-
-    // MARK: - UI
 
     private lazy var textField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Введите название категории"
+        tf.placeholder = NSLocalizedString("category.namePlaceholder", comment: "")
         tf.backgroundColor = AppColors.grayBackground
         tf.layer.cornerRadius = 16
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
@@ -24,7 +22,7 @@ final class NewCategoryViewController: UIViewController {
 
     private lazy var doneButton: UIButton = {
         let b = UIButton(type: .system)
-        b.setTitle("Готово", for: .normal)
+        b.setTitle(NSLocalizedString("common.done", comment: "Done"), for: .normal)
         b.setTitleColor(.white, for: .normal)
         b.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         b.backgroundColor = AppColors.grayButton
@@ -39,8 +37,8 @@ final class NewCategoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        navigationItem.title = "Новая категория"
+        view.backgroundColor = AppColors.primaryColor
+        navigationItem.title = NSLocalizedString("category.newTitle", comment: "")
         navigationController?.navigationBar.prefersLargeTitles = false
         view.addSubview(textField)
         view.addSubview(doneButton)
@@ -72,7 +70,8 @@ final class NewCategoryViewController: UIViewController {
     @objc private func textFieldDidChange() {
         let hasText = !(textField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? true)
         doneButton.isEnabled = hasText
-        doneButton.backgroundColor = hasText ? AppColors.blackDay : AppColors.grayButton
+        doneButton.backgroundColor = hasText ? AppColors.primaryInvertedColor : AppColors.grayButton
+        doneButton.setTitleColor(AppColors.primaryColor, for: .normal)
     }
 
     @objc private func doneTapped() {

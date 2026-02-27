@@ -1,6 +1,6 @@
 import Foundation
 
-// ViewModel экрана списка категорий: готовит данные для ячеек и обрабатывает действия пользователя.
+/// ViewModel экрана списка категорий.
 final class CategoryListViewModel {
 
     // MARK: - Bindings

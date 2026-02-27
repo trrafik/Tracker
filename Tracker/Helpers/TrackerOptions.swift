@@ -1,6 +1,6 @@
 import UIKit
 
-// Эмодзи для трекеров
+/// Набор доступных эмодзи для трекеров.
 enum TrackerEmoji: String, CaseIterable {
     case smile = "🙂"
     case heartEyes = "😻"
@@ -21,13 +21,11 @@ enum TrackerEmoji: String, CaseIterable {
     case island = "🏝"
     case sleepy = "😪"
     
-    // Строковое представление эмодзи
     var value: String {
-        return rawValue
+        rawValue
     }
 }
 
-// Цвета для трекеров
 enum TrackerColor: CaseIterable {
     case red
     case orange

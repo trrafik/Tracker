@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-// Делегат FRC, перенаправляет обновления в замыкание (чтобы не экспортировать Core Data в контроллеры)
+/// Делегат FRC, перенаправляющий изменения в замыкание.
 private final class FRCDelegate: NSObject, NSFetchedResultsControllerDelegate {
     private let onDidChange: () -> Void
 
@@ -14,6 +14,7 @@ private final class FRCDelegate: NSObject, NSFetchedResultsControllerDelegate {
     }
 }
 
+/// Хранилище трекеров поверх Core Data.
 final class TrackerStore {
 
     private let context: NSManagedObjectContext
@@ -38,7 +39,6 @@ final class TrackerStore {
         self?.onCategoriesDidChange?()
     }
 
-    // Вызывается при изменении данных в Core Data (через NSFetchedResultsController)
     var onCategoriesDidChange: (() -> Void)?
 
     convenience init() {
@@ -52,12 +52,10 @@ final class TrackerStore {
         self.categoryStore = categoryStore
     }
 
-    // Выполнить начальную загрузку данных для FRC
     func performFetch() throws {
         try fetchedResultsController.performFetch()
     }
 
-    // Преобразование результатов FRC в доменные категории
     func categoriesFromFetchedResults() -> [TrackerCategory] {
         guard let categories = fetchedResultsController.fetchedObjects else { return [] }
         return categories.map { categoryCore in
@@ -79,6 +77,34 @@ final class TrackerStore {
         core.schedule = tracker.schedule.map { String($0.rawValue) }.joined(separator: ",")
         core.category = category
 
+        try context.save()
+    }
+
+    func update(_ tracker: Tracker, categoryTitle: String) throws {
+        let request = TrackerCoreData.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", tracker.id as CVarArg)
+        request.fetchLimit = 1
+
+        guard let core = try context.fetch(request).first else { return }
+
+        core.name = tracker.name
+        core.emoji = tracker.emoji
+        core.color = UIColorMarshalling.hexString(from: tracker.color)
+        core.schedule = tracker.schedule.map { String($0.rawValue) }.joined(separator: ",")
+
+        let newCategory = try categoryStore.category(withTitle: categoryTitle)
+        core.category = newCategory
+
+        try context.save()
+    }
+
+    func delete(trackerId: UUID) throws {
+        let request = TrackerCoreData.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", trackerId as CVarArg)
+        request.fetchLimit = 1
+
+        guard let core = try context.fetch(request).first else { return }
+        context.delete(core)
         try context.save()
     }
 

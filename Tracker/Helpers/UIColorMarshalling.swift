@@ -1,6 +1,6 @@
 import UIKit
 
-// Сериализация и десериализация UIColor в hex-строку для хранения в Core Data (String).
+/// Сериализация и десериализация UIColor в hex-строку для хранения в Core Data (String).
 final class UIColorMarshalling {
 
     static func hexString(from color: UIColor) -> String {
