@@ -29,7 +29,7 @@
 		B7AAF2B22F3650BE000F7EF2 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF2B12F3650BE000F7EF2 /* TrackerRecordStore.swift */; };
 		B7AAF2B62F3650C0000F7EF2 /* DataBaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF2B72F3650C0000F7EF2 /* DataBaseStore.swift */; };
 		B7AAF2BA2F3650D0000F7EF2 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF2BB2F3650D0000F7EF2 /* UserDefaultsService.swift */; };
-		B7AAF3752F512A5B000F7EF2 /* TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF3742F512A5B000F7EF2 /* TrackerTests.swift */; };
+		B7AAF3752F512A5B000F7EF2 /* TrackersViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AAF3742F512A5B000F7EF2 /* TrackersViewControllerSnapshotTests.swift */; };
 		B7AAF37D2F512AA2000F7EF2 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = B7AAF37C2F512AA2000F7EF2 /* SnapshotTesting */; };
 		B7AAF3802F513FD7000F7EF2 /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = B7AAF37F2F513FD7000F7EF2 /* AppMetricaCore */; };
 		B7D6E7682F2A47A100B36E80 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */; };
@@ -88,7 +88,7 @@
 		B7AAF2B72F3650C0000F7EF2 /* DataBaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStore.swift; sourceTree = "<group>"; };
 		B7AAF2BB2F3650D0000F7EF2 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		B7AAF3722F512A5B000F7EF2 /* TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7AAF3742F512A5B000F7EF2 /* TrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTests.swift; sourceTree = "<group>"; };
+		B7AAF3742F512A5B000F7EF2 /* TrackersViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackersViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		B7D6E7662F2A47A100B36E80 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7D6E7672F2A47A100B36E80 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7D6E76A2F2AC13F00B36E80 /* EmojiCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 		B7AAF3732F512A5B000F7EF2 /* TrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				B7AAF3742F512A5B000F7EF2 /* TrackerTests.swift */,
+				B7AAF3742F512A5B000F7EF2 /* TrackersViewControllerSnapshotTests.swift */,
 			);
 			path = TrackerTests;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7AAF3752F512A5B000F7EF2 /* TrackerTests.swift in Sources */,
+				B7AAF3752F512A5B000F7EF2 /* TrackersViewControllerSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

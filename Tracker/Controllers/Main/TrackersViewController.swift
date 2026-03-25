@@ -89,12 +89,12 @@ final class TrackersViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        analyticsService.reportMainScreen(event: "open")
+        analyticsService.reportMainScreen(event: .open)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        analyticsService.reportMainScreen(event: "close")
+        analyticsService.reportMainScreen(event: .close)
     }
 
     // MARK: - Setup
@@ -238,7 +238,7 @@ final class TrackersViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func addButtonTapped() {
-        analyticsService.reportMainScreen(event: "click", item: "add_track")
+        analyticsService.reportMainScreen(event: .click, item: .addTrack)
         let newHabitViewController = NewHabitViewController()
         newHabitViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: newHabitViewController)
@@ -251,7 +251,7 @@ final class TrackersViewController: UIViewController {
     }
 
     @objc private func filterButtonTapped() {
-        analyticsService.reportMainScreen(event: "click", item: "filter")
+        analyticsService.reportMainScreen(event: .click, item: .filter)
         let filterVC = FilterListViewController()
         filterVC.currentFilter = UserDefaultsService.shared.trackerFilter
         filterVC.delegate = self
@@ -413,7 +413,7 @@ extension TrackersViewController: UICollectionViewDataSource {
                 return
             }
 
-            self.analyticsService.reportMainScreen(event: "click", item: "track")
+            self.analyticsService.reportMainScreen(event: .click, item: .track)
             self.toggleTrackerCompletion(trackerId: trackerId, isCompleted: newState)
         }
         
@@ -466,7 +466,7 @@ extension TrackersViewController: UICollectionViewDelegateFlowLayout {
             guard let self = self else { return nil }
             
             let editAction = UIAction(title: NSLocalizedString("main.editTracker", comment: "Edit tracker"), image: nil) { _ in
-                self.analyticsService.reportMainScreen(event: "click", item: "edit")
+                self.analyticsService.reportMainScreen(event: .click, item: .edit)
                 self.openEditHabit(tracker: tracker, categoryTitle: categoryTitle, completedDaysCount: completedDaysCount)
             }
             
@@ -475,7 +475,7 @@ extension TrackersViewController: UICollectionViewDelegateFlowLayout {
                 image: nil,
                 attributes: .destructive
             ) { _ in
-                self.analyticsService.reportMainScreen(event: "click", item: "delete")
+                self.analyticsService.reportMainScreen(event: .click, item: .delete)
                 self.showDeleteConfirmation(tracker: tracker)
             }
             
