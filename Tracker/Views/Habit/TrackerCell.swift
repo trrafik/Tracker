@@ -22,12 +22,15 @@ class TrackerCell: UICollectionViewCell {
     
     static let identifier = "TrackerCell"
     var onCompleteButtonTapped: ((UUID, Bool) -> Void)?
+    /// Конфигурация контекстного меню для ячейки.
+    var onContextMenuConfiguration: (() -> UIContextMenuConfiguration?)?
     
     // MARK: - Private
 
     private var tracker: Tracker?
     private var isCompleted: Bool = false
     private var completedDaysCount: Int = 0
+    private var contextMenuInteraction: UIContextMenuInteraction?
     
     // MARK: - UI Elements
     
@@ -60,7 +63,7 @@ class TrackerCell: UICollectionViewCell {
     
     private lazy var footerView: UIView = {
             let view = UIView()
-            view.backgroundColor = .systemBackground
+            view.backgroundColor = AppColors.primaryColor
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
@@ -68,7 +71,7 @@ class TrackerCell: UICollectionViewCell {
     private lazy var daysCountLabel: UILabel = {
             let label = UILabel()
             label.font = .systemFont(ofSize: 12, weight: .medium)
-            label.textColor = AppColors.blackDay
+            label.textColor = AppColors.primaryInvertedColor
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
         }()
@@ -166,29 +169,37 @@ class TrackerCell: UICollectionViewCell {
         
         // Настройка кнопки
         updateCompleteButton(isFutureDate: isFutureDate)
+        
+        if contextMenuInteraction == nil {
+            let interaction = UIContextMenuInteraction(delegate: self)
+            cardView.addInteraction(interaction)
+            contextMenuInteraction = interaction
+        }
     }
     
     // MARK: - Private Helpers
     
     private func updateDaysCountLabel() {
-        let daysText = completedDaysCount == 1 ? "день" : "дней"
-        daysCountLabel.text = "\(completedDaysCount) \(daysText)"
+        daysCountLabel.text = String.localizedStringWithFormat(
+            NSLocalizedString("days_count", comment: "N days"),
+            completedDaysCount
+        )
     }
     
     private func updateCompleteButton(isFutureDate: Bool = false) {
         if isFutureDate {
             completeButton.setImage(UIImage(systemName: "plus"), for: .normal)
             completeButton.tintColor = cardView.backgroundColor
-            completeButton.backgroundColor = .white
+            completeButton.backgroundColor = AppColors.primaryColor
             completeButton.isEnabled = false
         } else if isCompleted {
             completeButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
-            completeButton.tintColor = .white
+            completeButton.tintColor = AppColors.primaryColor
             completeButton.backgroundColor = cardView.backgroundColor?.withAlphaComponent(0.3)
             completeButton.isEnabled = true
         } else {
             completeButton.setImage(UIImage(systemName: "plus"), for: .normal)
-            completeButton.tintColor = .white
+            completeButton.tintColor = AppColors.primaryColor
             completeButton.backgroundColor = cardView.backgroundColor
             completeButton.isEnabled = true
         }
@@ -199,6 +210,17 @@ class TrackerCell: UICollectionViewCell {
     @objc private func completeButtonTapped() {
         guard let tracker = tracker else { return }
         onCompleteButtonTapped?(tracker.id, !isCompleted)
+    }
+}
+
+// MARK: - UIContextMenuInteractionDelegate
+
+extension TrackerCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(
+        _ interaction: UIContextMenuInteraction,
+        configurationForMenuAtLocation location: CGPoint
+    ) -> UIContextMenuConfiguration? {
+        return onContextMenuConfiguration?()
     }
 }
 

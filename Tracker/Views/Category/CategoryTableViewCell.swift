@@ -9,7 +9,7 @@ final class CategoryTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .regular)
-        label.textColor = AppColors.blackDay
+        label.textColor = AppColors.primaryInvertedColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

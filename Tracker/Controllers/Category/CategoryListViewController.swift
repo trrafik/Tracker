@@ -1,5 +1,6 @@
 import UIKit
 
+/// Экран выбора категории трекера.
 final class CategoryListViewController: UIViewController {
 
     weak var delegate: CategoryListViewControllerDelegate?
@@ -30,7 +31,7 @@ final class CategoryListViewController: UIViewController {
         p.maximumLineHeight = 18
         p.alignment = .center
         l.attributedText = NSAttributedString(
-            string: "Привычки и события можно\nобъединить по смыслу",
+            string: NSLocalizedString("category.placeholder", comment: ""),
             attributes: [.font: UIFont.systemFont(ofSize: 12, weight: .medium), .paragraphStyle: p]
         )
         l.numberOfLines = 0
@@ -54,10 +55,10 @@ final class CategoryListViewController: UIViewController {
 
     private lazy var addCategoryButton: UIButton = {
         let b = UIButton(type: .system)
-        b.setTitle("Добавить категорию", for: .normal)
-        b.setTitleColor(.white, for: .normal)
+        b.setTitle(NSLocalizedString("category.addButton", comment: ""), for: .normal)
+        b.setTitleColor(AppColors.primaryColor, for: .normal)
         b.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        b.backgroundColor = AppColors.blackDay
+        b.backgroundColor = AppColors.primaryInvertedColor
         b.layer.cornerRadius = 16
         b.addAction(UIAction { [weak self] _ in self?.addCategoryTapped() }, for: .touchUpInside)
         b.translatesAutoresizingMaskIntoConstraints = false
@@ -78,8 +79,8 @@ final class CategoryListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        navigationItem.title = "Категория"
+        view.backgroundColor = AppColors.primaryColor
+        navigationItem.title = NSLocalizedString("category.title", comment: "")
         navigationController?.navigationBar.prefersLargeTitles = false
         setupBindings()
         setupUI()

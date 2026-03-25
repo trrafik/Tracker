@@ -1,6 +1,6 @@
 import CoreData
 
-// Синглтон с Core Data стеком. Доступ к контексту: DataBaseStore.shared.persistentContainer.viewContext
+/// Синглтон с Core Data стеком. Доступ к контексту: DataBaseStore.shared.persistentContainer.viewContext
 final class DataBaseStore {
 
     static let shared = DataBaseStore()
@@ -10,7 +10,7 @@ final class DataBaseStore {
         guard let description = container.persistentStoreDescriptions.first else { return container }
         description.shouldMigrateStoreAutomatically = true
         description.shouldInferMappingModelAutomatically = true
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }

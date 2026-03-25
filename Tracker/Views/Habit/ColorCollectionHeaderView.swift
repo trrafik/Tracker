@@ -5,9 +5,9 @@ final class ColorCollectionHeaderView: UICollectionReusableView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Цвет"
+        label.text = NSLocalizedString("habit.color", comment: "")
         label.font = .systemFont(ofSize: 19, weight: .bold)
-        label.textColor = AppColors.blackDay
+        label.textColor = AppColors.primaryInvertedColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

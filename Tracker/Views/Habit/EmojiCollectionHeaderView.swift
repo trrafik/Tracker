@@ -5,9 +5,9 @@ final class EmojiCollectionHeaderView: UICollectionReusableView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Emoji"
+        label.text = NSLocalizedString("habit.emoji", comment: "")
         label.font = .systemFont(ofSize: 19, weight: .bold)
-        label.textColor = AppColors.blackDay
+        label.textColor = AppColors.primaryInvertedColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -1,0 +1,74 @@
+/* Main */
+"main.trackers" = "Трекеры";
+"main.statistics" = "Статистика";
+"main.filters" = "Фильтры";
+"main.placeholderEmpty" = "Что будем отслеживать?";
+"main.placeholderNotFound" = "Ничего не найдено";
+"main.editTracker" = "Редактировать";
+"main.delete" = "Удалить";
+"main.deleteConfirmation" = "Уверены что хотите удалить трекер?";
+
+/* Search */
+"search.placeholder" = "Поиск";
+"search.cancel" = "Отменить";
+
+/* Common */
+"common.cancel" = "Отменить";
+"common.done" = "Готово";
+
+/* Statistics */
+"stat.empty" = "Анализировать пока нечего";
+"stat.bestPeriod" = "Лучший период";
+"stat.idealDays" = "Идеальные дни";
+"stat.completed" = "Трекеров завершено";
+"stat.average" = "Среднее значение";
+
+/* Habit / New habit */
+"habit.trackerNamePlaceholder" = "Введите название трекера";
+"habit.create" = "Создать";
+"habit.save" = "Сохранить";
+"habit.newTitle" = "Новая привычка";
+"habit.editTitle" = "Редактирование привычки";
+"habit.category" = "Категория";
+"habit.schedule" = "Расписание";
+"habit.scheduleTitle" = "Расписание";
+"habit.emoji" = "Emoji";
+"habit.color" = "Цвет";
+
+/* Category */
+"category.title" = "Категория";
+"category.newTitle" = "Новая категория";
+"category.namePlaceholder" = "Введите название категории";
+"category.addButton" = "Добавить категорию";
+"category.placeholder" = "Привычки и события можно\nобъединить по смыслу";
+
+/* Filter */
+"filter.all" = "Все трекеры";
+"filter.today" = "Трекеры на сегодня";
+"filter.completed" = "Завершённые";
+"filter.uncompleted" = "Незавершённые";
+
+/* Onboarding */
+"onboarding.page1" = "Отслеживайте только то, что хотите";
+"onboarding.page2" = "Даже если это не литры воды и йога";
+"onboarding.button" = "Вот это технологии!";
+
+/* Weekdays short */
+"weekday.short.mon" = "Пн";
+"weekday.short.tue" = "Вт";
+"weekday.short.wed" = "Ср";
+"weekday.short.thu" = "Чт";
+"weekday.short.fri" = "Пт";
+"weekday.short.sat" = "Сб";
+"weekday.short.sun" = "Вс";
+
+/* Weekdays full */
+"weekday.full.monday" = "Понедельник";
+"weekday.full.tuesday" = "Вторник";
+"weekday.full.wednesday" = "Среда";
+"weekday.full.thursday" = "Четверг";
+"weekday.full.friday" = "Пятница";
+"weekday.full.saturday" = "Суббота";
+"weekday.full.sunday" = "Воскресенье";
+
+"weekday.everyDay" = "Каждый день";
